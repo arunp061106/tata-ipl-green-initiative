@@ -1,0 +1,9 @@
+match,season,match_type,teams,dot_balls,trees_per_dot_ball,trees_pledged,trees_planted
+Qualifier 1,2023,Playoff,GT vs MI,78,500,39000,39000
+Eliminator,2023,Playoff,LSG vs MI,68,500,34000,34000
+Qualifier 2,2023,Playoff,GT vs MI,74,500,37000,37000
+Final,2023,Playoff,CSK vs GT,74,500,37000,37000
+Qualifier 1,2024,Playoff,KKR vs SRH,73,500,36500,36500
+Eliminator,2024,Playoff,RR vs RCB,74,500,37000,37000
+Qualifier 2,2024,Playoff,SRH vs RR,96,500,48000,48000
+Final,2024,Playoff,KKR vs SRH,80,500,40000,40000
