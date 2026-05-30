@@ -98,47 +98,178 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 html,body,[class*="css"]{font-family:'Inter',sans-serif;}
 
-.stApp{background:linear-gradient(135deg,#0d1117 0%,#161b22 60%,#0d1117 100%);}
-section[data-testid="stSidebar"]{background:linear-gradient(180deg,#0d1117,#161b22);border-right:1px solid #21262d;}
+.stApp{background:linear-gradient(135deg, #07090e 0%, #0d121f 50%, #07170e 100%) !important;}
+section[data-testid="stSidebar"]{background:linear-gradient(180deg,#07090e,#0d121f);border-right:1px solid #1f2a3d;}
 
-/* KPI cards */
+/* Glassmorphism Metric cards */
 div[data-testid="metric-container"]{
-    background:linear-gradient(135deg,#161b22,#1a2332);
-    border:1px solid #2ea043;border-radius:14px;padding:16px 20px;
-    box-shadow:0 4px 20px rgba(46,160,67,.12);
-    transition:transform .2s,box-shadow .2s;
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.6), rgba(26, 35, 50, 0.6)) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(46,160,67,.2) !important;
+    border-radius:14px;padding:16px 20px;
+    box-shadow:0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-div[data-testid="metric-container"]:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(46,160,67,.25);}
+div[data-testid="metric-container"]:hover{
+    transform:translateY(-3px);
+    border-color: rgba(46,160,67,.5) !important;
+    box-shadow:0 12px 40px rgba(46,160,67,.25);
+}
 div[data-testid="metric-container"] label{color:#8b949e!important;font-size:.72rem!important;letter-spacing:.08em;text-transform:uppercase;}
-div[data-testid="metric-container"] div[data-testid="stMetricValue"]{color:#3fb950!important;font-size:1.65rem!important;font-weight:700!important;}
+div[data-testid="metric-container"] div[data-testid="stMetricValue"]{color:#2ea043!important;font-size:1.65rem!important;font-weight:700!important;text-shadow: 0 0 10px rgba(46,160,67,0.25);}
 
 h1{color:#e6edf3!important;letter-spacing:-.5px;}
 h2{color:#c9d1d9!important;}
 h3{color:#8b949e!important;font-size:1rem!important;}
-hr{border-color:#21262d;}
+hr{border-color:#1f2a3d;}
 
-/* Tabs */
-.stTabs [data-baseweb="tab-list"]{gap:6px;background:transparent;border-bottom:1px solid #21262d;padding-bottom:6px;flex-wrap:wrap;}
-.stTabs [data-baseweb="tab"]{background:#161b22;border-radius:8px;color:#8b949e;border:1px solid #21262d;padding:7px 16px;font-size:.85rem;font-weight:500;transition:all .2s;}
-.stTabs [data-baseweb="tab"]:hover{background:#21262d;color:#c9d1d9;border-color:#3fb950;}
-.stTabs [aria-selected="true"]{background:linear-gradient(135deg,#1a4731,#2ea043)!important;color:#fff!important;border-color:#2ea043!important;box-shadow:0 2px 12px rgba(46,160,67,.3);}
+/* Tabs styling */
+.stTabs [data-baseweb="tab-list"]{gap:6px;background:transparent;border-bottom:1px solid #1f2a3d;padding-bottom:6px;flex-wrap:wrap;}
+.stTabs [data-baseweb="tab"]{background:#0d121f;border-radius:8px;color:#8b949e;border:1px solid #1f2a3d;padding:7px 16px;font-size:.85rem;font-weight:500;transition:all .2s;}
+.stTabs [data-baseweb="tab"]:hover{background:#1a2332;color:#c9d1d9;border-color:#2ea043;}
+.stTabs [aria-selected="true"]{background:linear-gradient(135deg,#123824,#2ea043)!important;color:#fff!important;border-color:#2ea043!important;box-shadow:0 2px 12px rgba(46,160,67,.45);}
 
-.js-plotly-plot{border-radius:12px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.5);}
-.stDataFrame{border:1px solid #21262d;border-radius:10px;overflow:hidden;}
+.js-plotly-plot{border-radius:12px;overflow:hidden;box-shadow:0 8px 32px 0 rgba(0,0,0,0.4);border: 1px solid rgba(255,255,255,0.05);}
+.stDataFrame{border:1px solid #1f2a3d;border-radius:10px;overflow:hidden;}
+
+/* Premium Glass Cards */
+.glass-card {
+    background: rgba(13, 18, 31, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(46, 160, 67, 0.15);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+    margin-bottom: 20px;
+    transition: all 0.3s ease-in-out;
+}
+.glass-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(46, 160, 67, 0.35);
+    box-shadow: 0 12px 40px 0 rgba(46, 160, 67, 0.15);
+}
+
+/* Sustainability Pipeline funnel */
+.funnel-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 15px 0 10px 0;
+}
+.funnel-step {
+    flex: 1;
+    min-width: 180px;
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.7), rgba(26, 35, 50, 0.7));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+}
+.funnel-step::after {
+    content: "➔";
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: rgba(46, 160, 67, 0.4);
+    z-index: 2;
+}
+@media (max-width: 992px) {
+    .funnel-step::after { content: "▼"; right: auto; bottom: -15px; left: 50%; transform: translateX(-50%); top: auto; }
+}
+.funnel-step:last-child::after {
+    display: none;
+}
+.funnel-step:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: rgba(46, 160, 67, 0.4);
+    box-shadow: 0 8px 25px rgba(46, 160, 67, 0.15);
+}
+.funnel-step-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8b949e;
+    margin-bottom: 6px;
+}
+.funnel-step-value {
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 8px 0;
+}
+.funnel-step-sub {
+    font-size: 0.75rem;
+    color: #8b949e;
+}
 
 /* Season legend cards */
 .season-card{
     border-radius:14px;padding:20px;text-align:center;
-    box-shadow:0 4px 20px rgba(0,0,0,.3);
+    box-shadow:0 8px 32px 0 rgba(0,0,0,0.35);
     transition:transform .2s,box-shadow .2s;
 }
-.season-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.4);}
+.season-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.45);}
 
-/* Info banner */
+/* Info banner & Analytical Tips */
 .info-banner{
-    background:linear-gradient(135deg,#1a2332,#161b22);
-    border:1px solid #21262d;border-left:4px solid #3fb950;
+    background:linear-gradient(135deg,#0d1627,#161b22);
+    border:1px solid #1f2a3d;border-left:4px solid #2ea043;
     border-radius:0 10px 10px 0;padding:14px 18px;margin:12px 0;
+}
+.tip-card {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.5), rgba(46, 160, 67, 0.05));
+    border: 1px solid rgba(46, 160, 67, 0.2);
+    border-left: 4px solid #2ea043;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 0.88rem;
+    color: #c9d1d9;
+    line-height: 1.5;
+}
+
+/* Vertical Funnel classes */
+.funnel-container-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 15px 0 10px 0;
+}
+.funnel-step-vertical {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.7), rgba(26, 35, 50, 0.7));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 15px 20px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+}
+.funnel-step-vertical::after {
+    content: "▼";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.1rem;
+    color: rgba(46, 160, 67, 0.5);
+    z-index: 2;
+}
+.funnel-step-vertical:last-child::after {
+    display: none;
+}
+.funnel-step-vertical:hover {
+    transform: translateY(-2px) scale(1.01);
+    border-color: rgba(46, 160, 67, 0.4);
+    box-shadow: 0 8px 25px rgba(46, 160, 67, 0.15);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -338,7 +469,164 @@ k4.metric("🏟️ Matches",       f"{n_matches_flt:,}")
 k5.metric("🌳 Trees Planted",  f"{total_trees:,.0f}")
 k6.metric("🌿 CO₂ Offset",    f"{total_co2:,.0f} kg")
 
-st.markdown("<br>", unsafe_allow_html=True)
+# ══════════════════════════════════════════════════════════════════
+# HERO SECTION — ECO-IMPACT HUB
+# ══════════════════════════════════════════════════════════════════
+
+st.markdown("""
+<div style='margin: 10px 0 20px 0;'>
+    <h2 style='margin-top:0;font-size:1.6rem;color:#e6edf3;font-weight:700;display:flex;align-items:center;gap:10px;'>
+        🌳 Eco-Impact Hub <span style='background:rgba(46,160,67,0.15);color:#2ea043;font-size:0.75rem;padding:3px 10px;border-radius:20px;border:1px solid rgba(46,160,67,0.3);font-weight:600;'>Priority View</span>
+    </h2>
+</div>
+""", unsafe_allow_html=True)
+
+# Dynamic calculations based on selected seasons in the sidebar
+selected_init_seasons = [s for s in selected_seasons if s in INITIATIVE]
+if not selected_init_seasons:
+    # fallback to show all seasons if none match the initiative years
+    selected_init_seasons = list(INITIATIVE.keys())
+
+hero_dots = sum(INITIATIVE[s]["dot_balls"] for s in selected_init_seasons)
+hero_pledged = sum(INITIATIVE[s]["trees_pledged"] for s in selected_init_seasons)
+hero_planted = sum(INITIATIVE[s]["trees_planted"] for s in selected_init_seasons)
+
+hcol1, hcol2 = st.columns([2, 3])
+
+with hcol1:
+    st.markdown(f"""
+    <div class="glass-card" style="height: 520px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 24px;">
+        <div>
+            <h3 style="margin-top: 0; color: #2ea043; font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                🌿 The Green Conversion Pipeline
+            </h3>
+            <p style="color: #8b949e; font-size: 0.82rem; margin-top: 4px; margin-bottom: 12px; line-height: 1.45;">
+                From deliveries bowled on the pitch to trees growing in forests. 
+                Below is the dynamic visual flow of the sustainability initiative for the selected seasons (<b>{", ".join(map(str, sorted(selected_init_seasons)))}</b>).
+            </p>
+        </div>
+        
+        <div class="funnel-container-vertical" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px;">
+            <div class="funnel-step-vertical">
+                <div class="funnel-step-title">⚫ 1. Sowing Phase</div>
+                <div class="funnel-step-value" style="color: #c9d1d9; font-size: 1.55rem; margin: 4px 0;">{hero_dots:,}</div>
+                <div class="funnel-step-sub">Dot Balls Bowled</div>
+            </div>
+            <div class="funnel-step-vertical">
+                <div class="funnel-step-title">📜 2. Commitment Phase</div>
+                <div class="funnel-step-value" style="color: #f0a500; font-size: 1.55rem; margin: 4px 0;">{hero_pledged:,}</div>
+                <div class="funnel-step-sub">Trees Pledged (to be planted)</div>
+            </div>
+            <div class="funnel-step-vertical">
+                <div class="funnel-step-title">🌳 3. Harvest Phase</div>
+                <div class="funnel-step-value" style="color: #2ea043; font-size: 1.55rem; margin: 4px 0;">✅ {hero_planted:,}</div>
+                <div class="funnel-step-sub">Trees Actually Planted (Confirmed)</div>
+            </div>
+        </div>
+        
+        <div class="tip-card" style="margin-top: 15px; margin-bottom: 0; padding: 10px 14px; font-size: 0.78rem;">
+            💡 <b>Did you know?</b> A single tree absorbs roughly <b>21.77 kg</b> of CO₂ annually. The {hero_planted:,} trees planted in these seasons offset approximately <b>{hero_planted * CO2_PER_TREE:,.0f} kg</b> of CO₂ per year!
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with hcol2:
+    from plotly.subplots import make_subplots
+    
+    plot_seasons = sorted(selected_init_seasons)
+    plot_dots = [INITIATIVE[s]["dot_balls"] for s in plot_seasons]
+    plot_pledged = [INITIATIVE[s]["trees_pledged"] for s in plot_seasons]
+    plot_planted = [INITIATIVE[s]["trees_planted"] for s in plot_seasons]
+    
+    fig_hero = make_subplots(specs=[[{"secondary_y": True}]])
+    
+    # 1. Bar chart for Dot Balls Bowled on Left Axis (Primary Y)
+    fig_hero.add_trace(
+        go.Bar(
+            x=[f"IPL {s}" for s in plot_seasons],
+            y=plot_dots,
+            name="Dot Balls Bowled",
+            marker=dict(
+                color="rgba(31, 42, 61, 0.4)",
+                line=dict(color="#8b949e", width=1.5)
+            ),
+            text=plot_dots,
+            texttemplate="%{text:,}",
+            textposition="outside",
+            hovertemplate="<b>%{x}</b><br>Dot Balls Bowled: %{y:,}<extra></extra>"
+        ),
+        secondary_y=False
+    )
+    
+    # 2. Scatter/Line for Trees Pledged on Right Axis (Secondary Y)
+    fig_hero.add_trace(
+        go.Scatter(
+            x=[f"IPL {s}" for s in plot_seasons],
+            y=plot_pledged,
+            name="Trees Pledged 📜",
+            mode="lines+markers",
+            line=dict(color="#f0a500", width=2.5, dash="dot"),
+            marker=dict(size=8, color="#f0a500", symbol="circle-open"),
+            hovertemplate="Trees Pledged: %{y:,}<extra></extra>"
+        ),
+        secondary_y=True
+    )
+    
+    # 3. Scatter/Line for Trees Actually Planted on Right Axis (Secondary Y)
+    fig_hero.add_trace(
+        go.Scatter(
+            x=[f"IPL {s}" for s in plot_seasons],
+            y=plot_planted,
+            name="Trees Planted 🌳",
+            mode="lines+markers",
+            line=dict(color="#2ea043", width=3.5),
+            marker=dict(size=12, color="#2ea043", symbol="diamond"),
+            fill="tozeroy",
+            fillcolor="rgba(46, 160, 67, 0.04)",
+            hovertemplate="Trees Planted: %{y:,}<extra></extra>"
+        ),
+        secondary_y=True
+    )
+    
+    # Update layout to blend with glassmorphism
+    fig_hero.update_layout(
+        **_LAY,
+        height=520,
+        title=dict(
+            text="📊 Sowing to Sustainability: Dot Balls vs. Trees Planted",
+            font=dict(color="#e6edf3", size=15)
+        ),
+        xaxis=dict(
+            title="IPL Season", 
+            tickfont=dict(color="#c9d1d9"),
+            gridcolor="rgba(255, 255, 255, 0.05)"
+        ),
+        yaxis=dict(
+            title="Dot Balls Bowled (Bars)", 
+            tickfont=dict(color="#c9d1d9"),
+            gridcolor="rgba(255, 255, 255, 0.05)"
+        ),
+        yaxis2=dict(
+            title="Number of Trees (Lines)", 
+            tickfont=dict(color="#c9d1d9"),
+            overlaying="y",
+            side="right",
+            gridcolor="rgba(255, 255, 255, 0.02)"
+        ),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        ),
+        margin=dict(t=80, b=40, l=40, r=40)
+    )
+    
+    st.plotly_chart(fig_hero, use_container_width=True)
+
+st.markdown("<hr style='margin: 20px 0 25px 0; border-color: #1f2a3d;'>", unsafe_allow_html=True)
+
 
 # ══════════════════════════════════════════════════════════════════
 # TABS
@@ -377,26 +665,51 @@ with tab1:
         fig.update_layout(**_LAY)
         st.plotly_chart(fig, width="stretch")
 
+    st.markdown("""
+    <div class="glass-card" style="margin-top: 15px; margin-bottom: 20px; padding: 20px 24px;">
+        <h3 style="margin-top: 0; color: #2ea043; font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+            🏏 Match Phase Dynamics: Volume vs. Density
+        </h3>
+        <p style="color: #8b949e; font-size: 0.85rem; margin-top: 4px; margin-bottom: 10px; line-height: 1.45;">
+            Analyzing dot ball behavior by match phase reveals the difference between <b>Volume</b> (total count of dot balls bowled) and <b>Density</b> (the percentage of total deliveries in that phase that are dots).
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
     c3, c4 = st.columns([2,3])
     with c3:
         fig = px.pie(phase_agg, values="dot_balls", names="phase", hole=.48,
-                     title="🏏 Dot Balls by Phase",
-                     color_discrete_sequence=["#3fb950","#58a6ff","#f0a500"],
+                     title="🏏 Dot Balls Volume by Phase",
+                     color_discrete_sequence=["#2ea043","#58a6ff","#f0a500"],
                      template=PLOT_THEME)
         fig.update_traces(textinfo="percent+label", pull=[.04]*3, textfont_size=13)
         fig.update_layout(**_LAY)
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     with c4:
         fig = px.bar(phase_agg.sort_values("dot_pct", ascending=False),
                      x="phase", y="dot_pct", color="phase",
-                     color_discrete_sequence=["#3fb950","#58a6ff","#f0a500"],
-                     title="📊 Dot Ball % by Phase",
+                     color_discrete_sequence=["#2ea043","#58a6ff","#f0a500"],
+                     title="📊 Dot Ball Density (%) by Phase",
                      labels={"phase":"Phase","dot_pct":"Dot Ball %"},
                      template=PLOT_THEME, text="dot_pct")
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
         fig.update_layout(**_LAY, showlegend=False)
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
+
+    # Calculate Powerplay dot percentage dynamically for the tip card
+    try:
+        pp_dot_pct = phase_agg[phase_agg['phase']=='Powerplay']['dot_pct'].values[0]
+        pp_str = f"<b>{pp_dot_pct:.1f}%</b>"
+    except IndexError:
+        pp_str = "<b>high</b>"
+
+    st.markdown(f"""
+    <div class="tip-card" style="margin-bottom: 25px;">
+        💡 <b>Analytical Insight:</b> While the <b>left chart (Volume)</b> shows that the <b>Middle Phase</b> contributes the largest absolute quantity of dot balls (since it spans 9 overs), the <b>right chart (Density)</b> reveals that the <b>Powerplay Phase</b> has the highest dot ball density at {pp_str}. This is where new-ball bowling intensity meets cautious opening batters trying to preserve their wickets!
+    </div>
+    """, unsafe_allow_html=True)
+
 
     st.subheader("📋 Team Summary")
     td = (team_agg.sort_values("dot_balls", ascending=False).reset_index(drop=True)
@@ -981,6 +1294,64 @@ with tab6:
     i2.metric("🌿 CO₂ Offset (kg/yr)", f"{total_co2_ipl:,.0f}")
     i3.metric("🌍 IPL+WPL Combined",   f"{CUMULATIVE_ALL:,} trees")
     i4.metric("🌡️ CO₂ (IPL+WPL)",     f"{CUMULATIVE_ALL*CO2_PER_TREE:,.0f} kg/yr")
+
+    # ── Interactive Green Impact Simulator ────────────────────────
+    st.markdown("<hr style='border-color: #1f2a3d; margin: 25px 0;'>", unsafe_allow_html=True)
+    st.subheader("🔮 Interactive Green Impact Simulator")
+    st.markdown("""
+    Adjust the sliders below to simulate hypothetical scenarios and visualize the projected environmental pay-offs if the Green Dot Ball Initiative rate or coverage changes.
+    """)
+    
+    sim_col1, sim_col2 = st.columns([1, 1])
+    with sim_col1:
+        st.markdown("""
+        <div style='background:rgba(13, 18, 31, 0.45); border:1px solid rgba(46, 160, 67, 0.2); border-radius:12px; padding:20px; margin-bottom: 15px;'>
+            <h4 style='margin-top:0; color:#2ea043; font-size:0.95rem; font-weight:600; display:flex; align-items:center; gap:6px;'>
+                ⚙️ Simulation Controls
+            </h4>
+            <p style='color:#8b949e; font-size:0.78rem; margin-top:4px;'>Modify the parameters to view cumulative offset potentials.</p>
+        </div>
+        """, unsafe_allow_html=True)
+        sim_dots = st.slider("Hypothetical Dot Balls Bowled", min_value=100, max_value=15000, value=5000, step=100, key="sim_dots_slider")
+        sim_rate = st.slider("Saplings Planted per Dot Ball", min_value=1, max_value=1000, value=18, step=1, key="sim_rate_slider")
+    
+    with sim_col2:
+        sim_trees = sim_dots * sim_rate
+        sim_co2 = sim_trees * CO2_PER_TREE
+        # Average passenger vehicle emissions: 4600 kg CO2 / year (US EPA)
+        sim_cars = sim_co2 / 4600
+        # Average US forest acre absorption: 2500 kg CO2 / year
+        sim_acres = sim_co2 / 2500
+        
+        st.markdown(f"""
+        <div class="glass-card" style="margin-bottom:0; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:20px 24px;">
+            <h4 style="margin-top:0; color:#2ea043; font-size:1rem; font-weight:600; display:flex; align-items:center; gap:8px;">
+                🌳 Projected Environmental Payoff
+            </h4>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin:15px 0;">
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:12px; text-align:center;">
+                    <div style="color:#8b949e; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.05em;">Trees Planted</div>
+                    <div style="color:#2ea043; font-size:1.5rem; font-weight:700; margin-top:4px;">{sim_trees:,}</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:12px; text-align:center;">
+                    <div style="color:#8b949e; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.05em;">CO₂ Offset / Yr</div>
+                    <div style="color:#58a6ff; font-size:1.5rem; font-weight:700; margin-top:4px;">{sim_co2:,.0f} kg</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:12px; text-align:center;">
+                    <div style="color:#8b949e; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.05em;">🚗 Cars Removed / Yr</div>
+                    <div style="color:#f0a500; font-size:1.50rem; font-weight:700; margin-top:4px;">{sim_cars:.1f}</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:12px; text-align:center;">
+                    <div style="color:#8b949e; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.05em;">🌲 Forest Acres / Yr</div>
+                    <div style="color:#ff7b72; font-size:1.50rem; font-weight:700; margin-top:4px;">{sim_acres:.1f}</div>
+                </div>
+            </div>
+            <div style="font-size:0.75rem; color:#8b949e; text-align:center; font-style:italic; border-top:1px solid rgba(255,255,255,0.05); padding-top:10px;">
+                Based on IPCC standards (21.77 kg CO₂/tree/yr) and US EPA passenger vehicle statistics.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
 
 # ══════════════════════════════════════════════════════════════════
 # FOOTER
