@@ -387,7 +387,7 @@ def make_aggs(flt_hash, data):
              trees=("trees_generated","sum"), initiative=("initiative_active","max"))
         .reset_index()
     )
-    teams = (data.groupby("match_id")["batting_team"]
+    teams = (df.groupby("match_id")["batting_team"]
              .apply(lambda x: " vs ".join(sorted(x.unique()))).reset_index()
              .rename(columns={"batting_team":"matchup"}))
     match_a = match_a.merge(teams, on="match_id", how="left")
