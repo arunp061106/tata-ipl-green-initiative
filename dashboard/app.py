@@ -503,8 +503,8 @@ hero_planted = sum(INITIATIVE[s]["trees_planted"] for s in selected_init_seasons
 hcol1, hcol2 = st.columns([2, 3])
 
 with hcol1:
-    st.markdown(f"""
-    <div class="glass-card" style="height: 520px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 24px;">
+    st.html(f"""
+    <div class="glass-card" style="height: 535px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 24px;">
         <div>
             <h3 style="margin-top: 0; color: #2ea043; font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
                 🌿 The Green Conversion Pipeline
@@ -537,104 +537,109 @@ with hcol1:
             💡 <b>Did you know?</b> A single tree absorbs roughly <b>21.77 kg</b> of CO₂ annually. The {hero_planted:,} trees planted in these seasons offset approximately <b>{hero_planted * CO2_PER_TREE:,.0f} kg</b> of CO₂ per year!
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """)
 
 with hcol2:
-    from plotly.subplots import make_subplots
-    
     plot_seasons = sorted(selected_init_seasons)
     plot_dots = [INITIATIVE[s]["dot_balls"] for s in plot_seasons]
     plot_pledged = [INITIATIVE[s]["trees_pledged"] for s in plot_seasons]
     plot_planted = [INITIATIVE[s]["trees_planted"] for s in plot_seasons]
     
-    fig_hero = make_subplots(specs=[[{"secondary_y": True}]])
-    
-    # 1. Bar chart for Dot Balls Bowled on Left Axis (Primary Y)
-    fig_hero.add_trace(
+    # Chart 1: Dot Balls Bowled (Sowing Phase)
+    fig_dots = go.Figure()
+    fig_dots.add_trace(
         go.Bar(
             x=[f"IPL {s}" for s in plot_seasons],
             y=plot_dots,
-            name="Dot Balls Bowled",
+            name="Dot Balls",
             marker=dict(
-                color="rgba(31, 42, 61, 0.4)",
-                line=dict(color="#8b949e", width=1.5)
+                color="rgba(88, 166, 255, 0.2)",
+                line=dict(color="#58a6ff", width=2)
             ),
             text=plot_dots,
             texttemplate="%{text:,}",
             textposition="outside",
             hovertemplate="<b>%{x}</b><br>Dot Balls Bowled: %{y:,}<extra></extra>"
-        ),
-        secondary_y=False
+        )
     )
-    
-    # 2. Scatter/Line for Trees Pledged on Right Axis (Secondary Y)
-    fig_hero.add_trace(
-        go.Scatter(
-            x=[f"IPL {s}" for s in plot_seasons],
-            y=plot_pledged,
-            name="Trees Pledged 📜",
-            mode="lines+markers",
-            line=dict(color="#f0a500", width=2.5, dash="dot"),
-            marker=dict(size=8, color="#f0a500", symbol="circle-open"),
-            hovertemplate="Trees Pledged: %{y:,}<extra></extra>"
-        ),
-        secondary_y=True
-    )
-    
-    # 3. Scatter/Line for Trees Actually Planted on Right Axis (Secondary Y)
-    fig_hero.add_trace(
-        go.Scatter(
-            x=[f"IPL {s}" for s in plot_seasons],
-            y=plot_planted,
-            name="Trees Planted 🌳",
-            mode="lines+markers",
-            line=dict(color="#2ea043", width=3.5),
-            marker=dict(size=12, color="#2ea043", symbol="diamond"),
-            fill="tozeroy",
-            fillcolor="rgba(46, 160, 67, 0.04)",
-            hovertemplate="Trees Planted: %{y:,}<extra></extra>"
-        ),
-        secondary_y=True
-    )
-    
-    # Update layout to blend with glassmorphism
-    fig_hero.update_layout(
-        **{
-            **_LAY,
-            "legend": dict(
-                orientation="h",
-                yanchor="bottom",
-                y=1.02,
-                xanchor="right",
-                x=1
-            ),
-            "margin": dict(t=80, b=40, l=40, r=40)
-        },
-        height=520,
+    fig_dots.update_layout(
+        **_LAY,
+        height=240,
+        margin=dict(t=40, b=30, l=40, r=40),
         title=dict(
-            text="📊 Sowing to Sustainability: Dot Balls vs. Trees Planted",
-            font=dict(color="#e6edf3", size=15)
+            text="🏏 Sowing Phase: Dot Balls Bowled per Season",
+            font=dict(color="#e6edf3", size=13)
         ),
         xaxis=dict(
-            title="IPL Season", 
             tickfont=dict(color="#c9d1d9"),
             gridcolor="rgba(255, 255, 255, 0.05)"
         ),
         yaxis=dict(
-            title="Dot Balls Bowled (Bars)", 
             tickfont=dict(color="#c9d1d9"),
             gridcolor="rgba(255, 255, 255, 0.05)"
-        ),
-        yaxis2=dict(
-            title="Number of Trees (Lines)", 
-            tickfont=dict(color="#c9d1d9"),
-            overlaying="y",
-            side="right",
-            gridcolor="rgba(255, 255, 255, 0.02)"
         )
     )
     
-    st.plotly_chart(fig_hero, use_container_width=True)
+    # Chart 2: Trees Pledged vs. Actually Planted (Commitment vs. Harvest Phase)
+    fig_trees = go.Figure()
+    fig_trees.add_trace(
+        go.Bar(
+            x=[f"IPL {s}" for s in plot_seasons],
+            y=plot_pledged,
+            name="Trees Pledged 📜",
+            marker=dict(
+                color="rgba(240, 165, 0, 0.2)",
+                line=dict(color="#f0a500", width=2)
+            ),
+            text=plot_pledged,
+            texttemplate="%{text:,}",
+            textposition="outside",
+            hovertemplate="Trees Pledged: %{y:,}<extra></extra>"
+        )
+    )
+    fig_trees.add_trace(
+        go.Bar(
+            x=[f"IPL {s}" for s in plot_seasons],
+            y=plot_planted,
+            name="Trees Planted 🌳",
+            marker=dict(
+                color="rgba(46, 160, 67, 0.2)",
+                line=dict(color="#2ea043", width=2)
+            ),
+            text=plot_planted,
+            texttemplate="%{text:,}",
+            textposition="outside",
+            hovertemplate="Trees Actually Planted: %{y:,}<extra></extra>"
+        )
+    )
+    fig_trees.update_layout(
+        **_LAY,
+        height=265,
+        barmode="group",
+        margin=dict(t=40, b=30, l=40, r=40),
+        title=dict(
+            text="🌳 Commitment & Harvest: Trees Pledged vs. Planted",
+            font=dict(color="#e6edf3", size=13)
+        ),
+        xaxis=dict(
+            tickfont=dict(color="#c9d1d9"),
+            gridcolor="rgba(255, 255, 255, 0.05)"
+        ),
+        yaxis=dict(
+            tickfont=dict(color="#c9d1d9"),
+            gridcolor="rgba(255, 255, 255, 0.05)"
+        ),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        )
+    )
+    
+    st.plotly_chart(fig_dots, use_container_width=True)
+    st.plotly_chart(fig_trees, use_container_width=True)
 
 st.markdown("<hr style='margin: 20px 0 25px 0; border-color: #1f2a3d;'>", unsafe_allow_html=True)
 
