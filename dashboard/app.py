@@ -3,6 +3,15 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+import textwrap
+
+# Wrap st.markdown to automatically dedent multiline strings, preventing indented HTML from being parsed as code blocks
+_original_markdown = st.markdown
+def _custom_markdown(body, *args, **kwargs):
+    if isinstance(body, str):
+        body = textwrap.dedent(body)
+    return _original_markdown(body, *args, **kwargs)
+st.markdown = _custom_markdown
 
 # ══════════════════════════════════════════════════════════════════
 # PAGE CONFIG
