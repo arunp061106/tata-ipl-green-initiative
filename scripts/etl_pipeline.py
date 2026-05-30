@@ -85,6 +85,10 @@ for filename in json_files:
     venue        = info.get("venue", "Unknown")
     event_info   = info.get("event", {})
     match_number = event_info.get("match_number", 0) or 0
+    if not match_number and "stage" in event_info:
+        stage = str(event_info["stage"]).lower()
+        if "qualifier" in stage or "eliminator" in stage or "final" in stage:
+            match_number = 71  # Flag as a playoff match (above 70 league stage matches)
 
     # Determine if this match is covered by the initiative
     initiative_active = is_playoff_match(season_int, match_number)
