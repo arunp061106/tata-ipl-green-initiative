@@ -150,6 +150,9 @@ for filename in json_files:
     match_date   = info.get("dates", ["Unknown"])[0]
     venue_raw    = info.get("venue", "Unknown")
     venue        = clean_venue_name(venue_raw)
+    teams_list   = info.get("teams", [])
+    teams_list   = [t if t != "Royal Challengers Bangalore" else "Royal Challengers Bengaluru" for t in teams_list]
+    matchup      = " vs ".join(sorted(teams_list)) if len(teams_list) == 2 else "Unknown"
     event_info   = info.get("event", {})
     match_number = event_info.get("match_number", 0) or 0
     if not match_number and "stage" in event_info:
@@ -212,6 +215,7 @@ for filename in json_files:
                     "season":             season_int,
                     "date":               match_date,
                     "venue":              venue,
+                    "matchup":            matchup,
                     "match_number":       match_number,
                     "innings":            innings_index,
                     "batting_team":       team_name,

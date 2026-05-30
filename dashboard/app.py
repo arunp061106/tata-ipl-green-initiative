@@ -381,16 +381,12 @@ if selected_venue != "All": flt = flt[flt["venue"] == selected_venue]
 @st.cache_data(show_spinner=False)
 def make_aggs(flt_hash, data):
     match_a = (
-        data.groupby(["match_id","season","date","venue","match_number"])
+        data.groupby(["match_id","season","date","venue","match_number","matchup"])
         .agg(dot_balls=("is_dot_ball","sum"), total_balls=("is_dot_ball","count"),
              total_runs=("total_runs","sum"), wickets=("wicket","sum"),
              trees=("trees_generated","sum"), initiative=("initiative_active","max"))
         .reset_index()
     )
-    teams = (df.groupby("match_id")["batting_team"]
-             .apply(lambda x: " vs ".join(sorted(x.unique()))).reset_index()
-             .rename(columns={"batting_team":"matchup"}))
-    match_a = match_a.merge(teams, on="match_id", how="left")
     match_a["dot_pct"] = (match_a["dot_balls"]/match_a["total_balls"]*100).round(1)
     match_a["label"]   = match_a["matchup"]+" ("+match_a["season"].astype(str)+")"
 
