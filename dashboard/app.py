@@ -320,12 +320,12 @@ if not df.empty and 2026 in df["season"].values:
 
 with st.sidebar:
     st.markdown("""
-    <div style='text-align:center;padding:16px 0 8px;'>
-        <div style='font-size:2.8rem;'>🌳</div>
-        <div style='color:#3fb950;font-size:1.2rem;font-weight:700;'>EcoDot Analytics</div>
-        <div style='color:#8b949e;font-size:.75rem;margin-top:3px;'>Tata IPL Green Initiative</div>
-    </div><hr>
-    """, unsafe_allow_html=True)
+<div style='text-align:center;padding:16px 0 8px;'>
+<div style='font-size:2.8rem;'>🌳</div>
+<div style='color:#3fb950;font-size:1.2rem;font-weight:700;'>EcoDot Analytics</div>
+<div style='color:#8b949e;font-size:.75rem;margin-top:3px;'>Tata IPL Green Initiative</div>
+</div><hr>
+""", unsafe_allow_html=True)
 
     if df.empty:
         st.error("Dataset not found! Run `scripts/etl_pipeline.py` first.")
@@ -350,22 +350,22 @@ with st.sidebar:
     total_ini = sum(v["trees_planted"] for v in INITIATIVE.values())
 
     st.markdown(f"""
-    <div style='background:#161b22;border-radius:10px;padding:14px;text-align:center;border:1px solid #21262d;'>
-        <div style='color:#8b949e;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;'>DATASET OVERVIEW</div>
-        <div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;'>
-            <div><div style='color:#3fb950;font-size:1.1rem;font-weight:700;'>{n_matches:,}</div><div style='color:#8b949e;font-size:.65rem;'>Matches</div></div>
-            <div><div style='color:#58a6ff;font-size:1.1rem;font-weight:700;'>{n_seasons}</div><div style='color:#8b949e;font-size:.65rem;'>Seasons</div></div>
-            <div><div style='color:#f0a500;font-size:1.1rem;font-weight:700;'>{n_teams}</div><div style='color:#8b949e;font-size:.65rem;'>Teams</div></div>
-        </div>
-        <hr style='border-color:#21262d;margin:10px 0;'>
-        <div style='color:#3fb950;font-size:.85rem;font-weight:600;'>🌳 {total_ini:,} IPL Trees Planted</div>
-        <div style='color:#8b949e;font-size:.7rem;margin-top:2px;'>Since Initiative Launch (2023)</div>
-    </div>
-    <p style='color:#8b949e;font-size:.68rem;text-align:center;margin-top:10px;'>
-        Source: greendotball.com<br>
-        🌿 Initiative active: IPL 2023 onwards
-    </p>
-    """, unsafe_allow_html=True)
+<div style='background:#161b22;border-radius:10px;padding:14px;text-align:center;border:1px solid #21262d;'>
+<div style='color:#8b949e;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;'>DATASET OVERVIEW</div>
+<div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;'>
+<div><div style='color:#3fb950;font-size:1.1rem;font-weight:700;'>{n_matches:,}</div><div style='color:#8b949e;font-size:.65rem;'>Matches</div></div>
+<div><div style='color:#58a6ff;font-size:1.1rem;font-weight:700;'>{n_seasons}</div><div style='color:#8b949e;font-size:.65rem;'>Seasons</div></div>
+<div><div style='color:#f0a500;font-size:1.1rem;font-weight:700;'>{n_teams}</div><div style='color:#8b949e;font-size:.65rem;'>Teams</div></div>
+</div>
+<hr style='border-color:#21262d;margin:10px 0;'>
+<div style='color:#3fb950;font-size:.85rem;font-weight:600;'>🌳 {total_ini:,} IPL Trees Planted</div>
+<div style='color:#8b949e;font-size:.7rem;margin-top:2px;'>Since Initiative Launch (2023)</div>
+</div>
+<p style='color:#8b949e;font-size:.68rem;text-align:center;margin-top:10px;'>
+Source: greendotball.com<br>
+🌿 Initiative active: IPL 2023 onwards
+</p>
+""", unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════
 # FILTER
@@ -700,15 +700,15 @@ with tab1:
         st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("""
-    <div class="glass-card" style="margin-top: 15px; margin-bottom: 20px; padding: 20px 24px;">
-        <h3 style="margin-top: 0; color: #2ea043; font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-            🏏 Match Phase Dynamics: Volume vs. Density
-        </h3>
-        <p style="color: #8b949e; font-size: 0.85rem; margin-top: 4px; margin-bottom: 10px; line-height: 1.45;">
-            Analyzing dot ball behavior by match phase reveals the difference between <b>Volume</b> (total count of dot balls bowled) and <b>Density</b> (the percentage of total deliveries in that phase that are dots).
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+<div class="glass-card" style="margin-top: 15px; margin-bottom: 20px; padding: 20px 24px;">
+<h3 style="margin-top: 0; color: #2ea043; font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+🏏 Match Phase Dynamics: Volume vs. Density
+</h3>
+<p style="color: #8b949e; font-size: 0.85rem; margin-top: 4px; margin-bottom: 10px; line-height: 1.45;">
+Analyzing dot ball behavior by match phase reveals the difference between <b>Volume</b> (total count of dot balls bowled) and <b>Density</b> (the percentage of total deliveries in that phase that are dots).
+</p>
+</div>
+""", unsafe_allow_html=True)
 
     # Force strict chronological order and color mapping for Match Phases
     phase_order = ["Powerplay", "Middle", "Death"]
@@ -809,18 +809,18 @@ with tab2:
     r1,r2 = st.columns(2)
     with r1:
         st.markdown(f"""
-        <div class='info-banner'>
-            <b style='color:#3fb950;'>🏆 Most Dot Balls in a Match</b><br>
-            <span style='font-size:1.5rem;font-weight:700;color:#e6edf3;'>{int(max_m['dot_balls'])} dot balls</span><br>
-            <span style='color:#8b949e;'>{max_m['matchup']} · {max_m['venue']} · Season {int(max_m['season'])} · Dot%: {max_m['dot_pct']}%</span>
-        </div>""", unsafe_allow_html=True)
+<div class='info-banner'>
+<b style='color:#3fb950;'>🏆 Most Dot Balls in a Match</b><br>
+<span style='font-size:1.5rem;font-weight:700;color:#e6edf3;'>{int(max_m['dot_balls'])} dot balls</span><br>
+<span style='color:#8b949e;'>{max_m['matchup']} · {max_m['venue']} · Season {int(max_m['season'])} · Dot%: {max_m['dot_pct']}%</span>
+</div>""", unsafe_allow_html=True)
     with r2:
         st.markdown(f"""
-        <div class='info-banner' style='border-left-color:#f85149;'>
-            <b style='color:#f85149;'>🔥 Fewest Dot Balls in a Match</b><br>
-            <span style='font-size:1.5rem;font-weight:700;color:#e6edf3;'>{int(min_m['dot_balls'])} dot balls</span><br>
-            <span style='color:#8b949e;'>{min_m['matchup']} · {min_m['venue']} · Season {int(min_m['season'])} · Dot%: {min_m['dot_pct']}%</span>
-        </div>""", unsafe_allow_html=True)
+<div class='info-banner' style='border-left-color:#f85149;'>
+<b style='color:#f85149;'>🔥 Fewest Dot Balls in a Match</b><br>
+<span style='font-size:1.5rem;font-weight:700;color:#e6edf3;'>{int(min_m['dot_balls'])} dot balls</span><br>
+<span style='color:#8b949e;'>{min_m['matchup']} · {min_m['venue']} · Season {int(min_m['season'])} · Dot%: {min_m['dot_pct']}%</span>
+</div>""", unsafe_allow_html=True)
 
     c1,c2 = st.columns(2)
     with c1:
@@ -903,13 +903,13 @@ with tab3:
     for col,label,val,name,sub,color in cards:
         with col:
             st.markdown(f"""
-            <div style='background:linear-gradient(135deg,#161b22,#1a2332);
-                border:1px solid {color};border-radius:12px;padding:16px;text-align:center;'>
-                <div style='color:#8b949e;font-size:.7rem;text-transform:uppercase;'>{label}</div>
-                <div style='color:{color};font-size:1.6rem;font-weight:700;margin:4px 0;'>{val}</div>
-                <div style='color:#e6edf3;font-size:.9rem;font-weight:600;'>{name}</div>
-                <div style='color:#8b949e;font-size:.75rem;margin-top:2px;'>{sub}</div>
-            </div>""", unsafe_allow_html=True)
+<div style='background:linear-gradient(135deg,#161b22,#1a2332);
+border:1px solid {color};border-radius:12px;padding:16px;text-align:center;'>
+<div style='color:#8b949e;font-size:.7rem;text-transform:uppercase;'>{label}</div>
+<div style='color:{color};font-size:1.6rem;font-weight:700;margin:4px 0;'>{val}</div>
+<div style='color:#e6edf3;font-size:.9rem;font-weight:600;'>{name}</div>
+<div style='color:#8b949e;font-size:.75rem;margin-top:2px;'>{sub}</div>
+</div>""", unsafe_allow_html=True)
 
     c1,c2 = st.columns(2)
     with c1:
@@ -991,13 +991,13 @@ with tab4:
     for col,label,val,name,sub,color in cards_b:
         with col:
             st.markdown(f"""
-            <div style='background:linear-gradient(135deg,#161b22,#1a2332);
-                border:1px solid {color};border-radius:12px;padding:16px;text-align:center;'>
-                <div style='color:#8b949e;font-size:.7rem;text-transform:uppercase;'>{label}</div>
-                <div style='color:{color};font-size:1.6rem;font-weight:700;margin:4px 0;'>{val}</div>
-                <div style='color:#e6edf3;font-size:.9rem;font-weight:600;'>{name}</div>
-                <div style='color:#8b949e;font-size:.75rem;margin-top:2px;'>{sub}</div>
-            </div>""", unsafe_allow_html=True)
+<div style='background:linear-gradient(135deg,#161b22,#1a2332);
+border:1px solid {color};border-radius:12px;padding:16px;text-align:center;'>
+<div style='color:#8b949e;font-size:.7rem;text-transform:uppercase;'>{label}</div>
+<div style='color:{color};font-size:1.6rem;font-weight:700;margin:4px 0;'>{val}</div>
+<div style='color:#e6edf3;font-size:.9rem;font-weight:600;'>{name}</div>
+<div style='color:#8b949e;font-size:.75rem;margin-top:2px;'>{sub}</div>
+</div>""", unsafe_allow_html=True)
 
     c1,c2 = st.columns(2)
     with c1:
@@ -1061,21 +1061,20 @@ with tab5:
     max_v = venue_agg.loc[venue_agg["dot_pct"].idxmax()]
     min_v = venue_agg.loc[venue_agg["dot_pct"].idxmin()]
 
-    r1,r2 = st.columns(2)
     with r1:
         st.markdown(f"""
-        <div class='info-banner'>
-            <b style='color:#3fb950;'>🏟️ Most Bowler-Friendly Venue</b><br>
-            <span style='font-size:1.4rem;font-weight:700;color:#e6edf3;'>{max_v['dot_pct']:.1f}% dot balls</span><br>
-            <span style='color:#8b949e;'>{max_v['venue']} · {int(max_v['matches'])} matches · {max_v['dots_match']:.0f} dots/match</span>
-        </div>""", unsafe_allow_html=True)
+<div class='info-banner'>
+<b style='color:#3fb950;'>🏟️ Most Bowler-Friendly Venue</b><br>
+<span style='font-size:1.4rem;font-weight:700;color:#e6edf3;'>{max_v['dot_pct']:.1f}% dot balls</span><br>
+<span style='color:#8b949e;'>{max_v['venue']} · {int(max_v['matches'])} matches · {max_v['dots_match']:.0f} dots/match</span>
+</div>""", unsafe_allow_html=True)
     with r2:
         st.markdown(f"""
-        <div class='info-banner' style='border-left-color:#f0a500;'>
-            <b style='color:#f0a500;'>🎯 Most Batter-Friendly Venue</b><br>
-            <span style='font-size:1.4rem;font-weight:700;color:#e6edf3;'>{min_v['dot_pct']:.1f}% dot balls</span><br>
-            <span style='color:#8b949e;'>{min_v['venue']} · {int(min_v['matches'])} matches · {min_v['dots_match']:.0f} dots/match</span>
-        </div>""", unsafe_allow_html=True)
+<div class='info-banner' style='border-left-color:#f0a500;'>
+<b style='color:#f0a500;'>🎯 Most Batter-Friendly Venue</b><br>
+<span style='font-size:1.4rem;font-weight:700;color:#e6edf3;'>{min_v['dot_pct']:.1f}% dot balls</span><br>
+<span style='color:#8b949e;'>{min_v['venue']} · {int(min_v['matches'])} matches · {min_v['dots_match']:.0f} dots/match</span>
+</div>""", unsafe_allow_html=True)
 
     c1,c2 = st.columns(2)
     with c1:
@@ -1315,63 +1314,63 @@ with tab6:
 
     with info_col:
         st.markdown(f"""
-        <div class="glass-card" style="padding: 20px 24px; height: 580px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <h4 style="margin-top: 0; color: #2ea043; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-                    🛡️ Audited Verification &amp; Skeptic Buster
-                </h4>
-                <p style="color: #8b949e; font-size: 0.78rem; line-height: 1.45; margin-top: 6px; margin-bottom: 12px;">
-                    Is this just greenwashing? No. Every single tree is accounted for. The BCCI does not plant trees itself — instead, Tata and the BCCI partner directly with verified environmental NGOs (<b>Grow-Trees.com</b> and <b>SankalpTaru</b>) to handle on-ground planting, geo-tagging, and long-term care.
-                </p>
-                
-                <h5 style="margin: 8px 0 4px; color: #e6edf3; font-size: 0.8rem; font-weight: 600;">📍 Verified State-Wise Plantations (IPL + WPL)</h5>
-                <table style="width: 100%; border-collapse: collapse; font-size: 0.74rem; color: #c9d1d9; margin-bottom: 10px;">
-                    <thead>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left;">
-                            <th style="padding: 4px 0; color: #8b949e;">State / Site</th>
-                            <th style="padding: 4px 0; color: #8b949e; text-align: right;">Saplings Planted</th>
-                            <th style="padding: 4px 0; color: #8b949e; text-align: right;">% Share</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                            <td style="padding: 5px 0;"><b>Assam</b> (Brahmaputra Basin)</td>
-                            <td style="text-align: right; font-weight: 600; color: #2ea043;">3,51,937</td>
-                            <td style="text-align: right; color: #8b949e;">54.9%</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                            <td style="padding: 5px 0;"><b>Kerala</b> (Munnar, Western Ghats)</td>
-                            <td style="text-align: right; font-weight: 600; color: #2ea043;">2,60,556</td>
-                            <td style="text-align: right; color: #8b949e;">40.6%</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                            <td style="padding: 5px 0;"><b>Himachal Pradesh</b> (Chamba Salooni)</td>
-                            <td style="text-align: right; font-weight: 600; color: #58a6ff;">12,780</td>
-                            <td style="text-align: right; color: #8b949e;">2.0%</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                            <td style="padding: 5px 0;"><b>Gujarat</b> (Sanand Industrial Belt)</td>
-                            <td style="text-align: right; font-weight: 600; color: #f0a500;">12,000</td>
-                            <td style="text-align: right; color: #8b949e;">1.9%</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                            <td style="padding: 5px 0;"><b>Maharashtra</b> (Yavatmal Vidarbha)</td>
-                            <td style="text-align: right; font-weight: 600; color: #ec7211;">10,000</td>
-                            <td style="text-align: right; color: #8b949e;">1.6%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div style="background: rgba(240, 165, 0, 0.05); border: 1px solid rgba(240, 165, 0, 0.15); border-radius: 8px; padding: 10px 14px; margin-top: 5px; font-size: 0.72rem; line-height: 1.4;">
-                ⚠️ <b>Analytical Gap Note:</b> While plantation sites and seasonal totals are officially announced, the BCCI does <b>not</b> release geo-tagged coordinates of individual saplings or independent survival auditing reports publicly. In reforestation drives, sapling survival rates typically range from 70% to 90% over a 3-year period depending on irrigation.
-            </div>
-            
-            <div style="background: rgba(88, 166, 255, 0.05); border: 1px solid rgba(88, 166, 255, 0.15); border-radius: 8px; padding: 10px 14px; margin-top: 6px; font-size: 0.72rem; line-height: 1.4;">
-                🔍 <b>Fact Check vs. Myths:</b> Circulated graphics sometimes claim a fabricated uniform <b>×45 rate</b> across seasons. Our audited facts reveal the real system uses exact factors: <b>×500</b> for IPL playoffs (2023–24), <b>×18</b> for 2025 full season, and <b>×19</b> for 2026.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+<div class="glass-card" style="padding: 20px 24px; height: 580px; display: flex; flex-direction: column; justify-content: space-between;">
+<div>
+<h4 style="margin-top: 0; color: #2ea043; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+🛡️ Audited Verification &amp; Skeptic Buster
+</h4>
+<p style="color: #8b949e; font-size: 0.78rem; line-height: 1.45; margin-top: 6px; margin-bottom: 12px;">
+Is this just greenwashing? No. Every single tree is accounted for. The BCCI does not plant trees itself — instead, Tata and the BCCI partner directly with verified environmental NGOs (<b>Grow-Trees.com</b> and <b>SankalpTaru</b>) to handle on-ground planting, geo-tagging, and long-term care.
+</p>
+
+<h5 style="margin: 8px 0 4px; color: #e6edf3; font-size: 0.8rem; font-weight: 600;">📍 Verified State-Wise Plantations (IPL + WPL)</h5>
+<table style="width: 100%; border-collapse: collapse; font-size: 0.74rem; color: #c9d1d9; margin-bottom: 10px;">
+<thead>
+<tr style="border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left;">
+<th style="padding: 4px 0; color: #8b949e;">State / Site</th>
+<th style="padding: 4px 0; color: #8b949e; text-align: right;">Saplings Planted</th>
+<th style="padding: 4px 0; color: #8b949e; text-align: right;">% Share</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+<td style="padding: 5px 0;"><b>Assam</b> (Brahmaputra Basin)</td>
+<td style="text-align: right; font-weight: 600; color: #2ea043;">3,51,937</td>
+<td style="text-align: right; color: #8b949e;">54.9%</td>
+</tr>
+<tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+<td style="padding: 5px 0;"><b>Kerala</b> (Munnar, Western Ghats)</td>
+<td style="text-align: right; font-weight: 600; color: #2ea043;">2,60,556</td>
+<td style="text-align: right; color: #8b949e;">40.6%</td>
+</tr>
+<tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+<td style="padding: 5px 0;"><b>Himachal Pradesh</b> (Chamba Salooni)</td>
+<td style="text-align: right; font-weight: 600; color: #58a6ff;">12,780</td>
+<td style="text-align: right; color: #8b949e;">2.0%</td>
+</tr>
+<tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+<td style="padding: 5px 0;"><b>Gujarat</b> (Sanand Industrial Belt)</td>
+<td style="text-align: right; font-weight: 600; color: #f0a500;">12,000</td>
+<td style="text-align: right; color: #8b949e;">1.9%</td>
+</tr>
+<tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+<td style="padding: 5px 0;"><b>Maharashtra</b> (Yavatmal Vidarbha)</td>
+<td style="text-align: right; font-weight: 600; color: #ec7211;">10,000</td>
+<td style="text-align: right; color: #8b949e;">1.6%</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div style="background: rgba(240, 165, 0, 0.05); border: 1px solid rgba(240, 165, 0, 0.15); border-radius: 8px; padding: 10px 14px; margin-top: 5px; font-size: 0.72rem; line-height: 1.4;">
+⚠️ <b>Analytical Gap Note:</b> While plantation sites and seasonal totals are officially announced, the BCCI does <b>not</b> release geo-tagged coordinates of individual saplings or independent survival auditing reports publicly. In reforestation drives, sapling survival rates typically range from 70% to 90% over a 3-year period depending on irrigation.
+</div>
+
+<div style="background: rgba(88, 166, 255, 0.05); border: 1px solid rgba(88, 166, 255, 0.15); border-radius: 8px; padding: 10px 14px; margin-top: 6px; font-size: 0.72rem; line-height: 1.4;">
+🔍 <b>Fact Check vs. Myths:</b> Circulated graphics sometimes claim a fabricated uniform <b>×45 rate</b> across seasons. Our audited facts reveal the real system uses exact factors: <b>×500</b> for IPL playoffs (2023–24), <b>×18</b> for 2025 full season, and <b>×19</b> for 2026.
+</div>
+</div>
+""", unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
