@@ -530,28 +530,27 @@ else:
 # ── Unify Green Conversion Pipeline Hub (Full Width) ──────────────────
 st.markdown(f"""
 <div class="glass-card" style="margin-bottom: 25px; padding: 24px 28px;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
-        <div style="flex: 1; min-width: 300px;">
-            <h3 style="margin-top: 0; color: #2ea043; font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                🌿 The Green Conversion Pipeline Hub
-            </h3>
-            <p style="color: #8b949e; font-size: 0.88rem; line-height: 1.55; margin: 0;">
-                Tracing the real-time conversion of dot balls bowled into committed and planted trees for: 
-                <span style="color: #2ea043; font-weight: 600;">{scope_str}</span> (Selected seasons: {", ".join(map(str, sorted(selected_init_seasons)))}).
-            </p>
-        </div>
-        <div style="background: rgba(46, 160, 67, 0.1); border: 1px solid rgba(46, 160, 67, 0.2); padding: 10px 18px; border-radius: 10px; min-width: 220px; text-align: right;">
-            <div style="font-size: 0.72rem; color: #8b949e; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;">🌳 Net CO₂ Offset Potential</div>
-            <div style="font-size: 1.3rem; color: #2ea043; font-weight: 700; margin-top: 2px;">{hero_planted * CO2_PER_TREE:,.0f} kg / year</div>
-            <div style="font-size: 0.7rem; color: #6e7681; margin-top: 2px;">Based on {CO2_PER_TREE} kg CO₂ per tree annually</div>
-        </div>
-    </div>
-    
-    <div class="info-banner" style="margin: 18px 0 0 0; padding: 12px 18px; border-radius: 8px; background: rgba(13, 22, 39, 0.45); border-left: 4px solid #2ea043; border-top: 1px solid rgba(255,255,255,0.03); border-right: 1px solid rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.03);">
-        <span style="font-size: 0.84rem; color: #c9d1d9; line-height: 1.5;">
-            💡 <b>How it works:</b> Every dot ball bowled in playoffs (2023-2024) or full seasons (2025 onwards) triggers the planting of saplings. The <b>Sowing Phase</b> counts the dots bowled. The <b>Commitment Phase</b> reflects the trees pledged by BCCI. The <b>Harvest Phase</b> verifies actual physical planting and maintenance of trees across designated reforestation sites.
-        </span>
-    </div>
+<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
+<div style="flex: 1; min-width: 300px;">
+<h3 style="margin-top: 0; color: #2ea043; font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+🌿 The Green Conversion Pipeline Hub
+</h3>
+<p style="color: #8b949e; font-size: 0.88rem; line-height: 1.55; margin: 0;">
+Tracing the real-time conversion of dot balls bowled into committed and planted trees for: 
+<span style="color: #2ea043; font-weight: 600;">{scope_str}</span> (Selected seasons: {", ".join(map(str, sorted(selected_init_seasons)))}).
+</p>
+</div>
+<div style="background: rgba(46, 160, 67, 0.1); border: 1px solid rgba(46, 160, 67, 0.2); padding: 10px 18px; border-radius: 10px; min-width: 220px; text-align: right;">
+<div style="font-size: 0.72rem; color: #8b949e; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;">🌳 Net CO₂ Offset Potential</div>
+<div style="font-size: 1.3rem; color: #2ea043; font-weight: 700; margin-top: 2px;">{hero_planted * CO2_PER_TREE:,.0f} kg / year</div>
+<div style="font-size: 0.7rem; color: #6e7681; margin-top: 2px;">Based on {CO2_PER_TREE} kg CO₂ per tree annually</div>
+</div>
+</div>
+<div class="info-banner" style="margin: 18px 0 0 0; padding: 12px 18px; border-radius: 8px; background: rgba(13, 22, 39, 0.45); border-left: 4px solid #2ea043; border-top: 1px solid rgba(255,255,255,0.03); border-right: 1px solid rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.03);">
+<span style="font-size: 0.84rem; color: #c9d1d9; line-height: 1.5;">
+💡 <b>How it works:</b> Every dot ball bowled in playoffs (2023-2024) or full seasons (2025 onwards) triggers the planting of saplings. The <b>Sowing Phase</b> counts the dots bowled. The <b>Commitment Phase</b> reflects the trees pledged by BCCI. The <b>Harvest Phase</b> verifies actual physical planting and maintenance of trees across designated reforestation sites.
+</span>
+</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -755,10 +754,40 @@ with tab1:
         pp_str = "<b>high</b>"
 
     st.markdown(f"""
-    <div class="tip-card" style="margin-bottom: 25px;">
-        💡 <b>Analytical Insight:</b> While the <b>left chart (Volume)</b> shows that the <b>Middle Phase</b> contributes the largest absolute quantity of dot balls (since it spans 9 overs), the <b>right chart (Density)</b> reveals that the <b>Powerplay Phase</b> has the highest dot ball density at {pp_str}. This is where new-ball bowling intensity meets cautious opening batters trying to preserve their wickets!
-    </div>
-    """, unsafe_allow_html=True)
+<div class="glass-card" style="margin-top: 20px; margin-bottom: 25px; border-left: 5px solid #2ea043; padding: 24px;">
+<h3 style="margin-top: 0; color: #e6edf3; font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+💡 Reader Note: Understanding Volume vs. Density in Match Phases
+</h3>
+<p style="color: #c9d1d9; font-size: 0.9rem; line-height: 1.6; margin-bottom: 18px;">
+The two charts above show the same match phase data but represent completely different analytical dimensions. Differentiating between them is key to understanding dot ball dynamics:
+</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px;">
+<div style="background: rgba(88, 166, 255, 0.05); border: 1px solid rgba(88, 166, 255, 0.15); border-radius: 10px; padding: 18px;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+<span style="font-size: 1.25rem;">🏏</span>
+<b style="color: #58a6ff; font-size: 0.95rem;">1. Volume (Total Quantity)</b>
+</div>
+<p style="color: #8b949e; font-size: 0.85rem; line-height: 1.5; margin: 0;">
+<b>Definition:</b> The absolute count of dot balls bowled in a phase.<br><br>
+<b>Key Dynamic:</b> The <b>Middle Phase</b> contributes the largest absolute quantity because it lasts the longest (<b>9 overs</b>, vs. 6 in Powerplay and 5 in Death). With 90 balls bowled per team compared to 36 or 30, the sheer volume naturally dominates the total dot count.
+</p>
+</div>
+<div style="background: rgba(240, 165, 0, 0.05); border: 1px solid rgba(240, 165, 0, 0.15); border-radius: 10px; padding: 18px;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+<span style="font-size: 1.25rem;">📊</span>
+<b style="color: #f0a500; font-size: 0.95rem;">2. Density (Intensity %)</b>
+</div>
+<p style="color: #8b949e; font-size: 0.85rem; line-height: 1.5; margin: 0;">
+<b>Definition:</b> The percentage of total deliveries in a phase that are dot balls.<br><br>
+<b>Key Dynamic:</b> The <b>Powerplay Phase</b> has the highest density (approx. {pp_str} of balls are dots). Even though it is short, opening batters face movement from the new ball, and bowlers bowl attacking spells while batters play carefully to protect their wickets, creating a high concentration of dot balls.
+</p>
+</div>
+</div>
+<div style="background: rgba(46, 160, 67, 0.05); border: 1px solid rgba(46, 160, 67, 0.15); border-radius: 8px; padding: 12px 16px; font-size: 0.85rem; color: #8b949e; line-height: 1.45;">
+🎯 <b>Analyst's Takeaway:</b> When looking at <b>Volume</b>, you see <i>where most trees are planted</i> (Middle Phase). When looking at <b>Density</b>, you see <i>where bowlers are most restrictive and defensive tactics dominate</i> (Powerplay Phase).
+</div>
+</div>
+""", unsafe_allow_html=True)
 
 
     st.subheader("📋 Team Summary")
