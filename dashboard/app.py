@@ -540,65 +540,118 @@ with hcol1:
     """)
 
 with hcol2:
-    # Aggregate data for the hero chart
     plot_seasons = sorted(selected_init_seasons)
     plot_dots = [INITIATIVE[s]["dot_balls"] for s in plot_seasons]
     plot_pledged = [INITIATIVE[s]["trees_pledged"] for s in plot_seasons]
     plot_planted = [INITIATIVE[s]["trees_planted"] for s in plot_seasons]
 
-    # ── Beautiful summary horizontal bar chart ─────────────────────
-    # Shows 3 key metrics as big, bold horizontal bars
-    labels = [
-        "⚫ Dot Balls Bowled",
-        "📜 Trees To Be Planted",
-        "🌳 Trees Actually Planted"
-    ]
-    values = [hero_dots, hero_pledged, hero_planted]
-    colors = ["#58a6ff", "#f0a500", "#2ea043"]
-
+    # ── Premium Triple-Gauge Indicator Dashboard ──────────────────
     fig_hero = go.Figure()
-    for i in range(3):
-        fig_hero.add_trace(go.Bar(
-            y=[labels[i]],
-            x=[values[i]],
-            orientation="h",
-            marker=dict(
-                color=colors[i],
-                line=dict(color=colors[i], width=1),
-                opacity=0.85,
-            ),
-            text=[f"  {values[i]:,}"],
-            textposition="outside",
-            textfont=dict(color=colors[i], size=18, family="Inter, sans-serif"),
-            hovertemplate=f"<b>{labels[i]}</b><br>Value: %{{x:,}}<extra></extra>",
-            showlegend=False,
-        ))
+
+    max_trees = max(hero_pledged, hero_planted, 1) * 1.15
+
+    # Gauge 1: Dot Balls Bowled (left)
+    fig_hero.add_trace(go.Indicator(
+        mode="gauge+number",
+        value=hero_dots,
+        title={"text": "<b>⚫ Dot Balls</b><br><span style='font-size:0.75em;color:#8b949e'>Bowled</span>",
+               "font": {"size": 13, "color": "#c9d1d9"}},
+        number={"font": {"size": 28, "color": "#58a6ff"}, "valueformat": ","},
+        gauge={
+            "axis": {"range": [0, max(hero_dots * 1.3, 1)], "tickwidth": 1, "tickcolor": "#21262d",
+                     "tickfont": {"size": 8, "color": "#6e7681"}},
+            "bar": {"color": "#58a6ff", "thickness": 0.7},
+            "bgcolor": "rgba(88,166,255,0.06)",
+            "borderwidth": 0,
+            "steps": [
+                {"range": [0, hero_dots * 0.5], "color": "rgba(88,166,255,0.03)"},
+                {"range": [hero_dots * 0.5, hero_dots * 0.8], "color": "rgba(88,166,255,0.08)"},
+                {"range": [hero_dots * 0.8, hero_dots * 1.3], "color": "rgba(88,166,255,0.14)"},
+            ],
+            "threshold": {"line": {"color": "#c9d1d9", "width": 2}, "thickness": 0.82, "value": hero_dots * 0.95},
+        },
+        domain={"x": [0, 0.30], "y": [0.12, 0.88]}
+    ))
+
+    # Gauge 2: Trees To Be Planted (center)
+    fig_hero.add_trace(go.Indicator(
+        mode="gauge+number",
+        value=hero_pledged,
+        title={"text": "<b>📜 Trees</b><br><span style='font-size:0.75em;color:#8b949e'>To Be Planted</span>",
+               "font": {"size": 13, "color": "#c9d1d9"}},
+        number={"font": {"size": 28, "color": "#f0a500"}, "valueformat": ","},
+        gauge={
+            "axis": {"range": [0, max_trees], "tickwidth": 1, "tickcolor": "#21262d",
+                     "tickfont": {"size": 8, "color": "#6e7681"}},
+            "bar": {"color": "#f0a500", "thickness": 0.7},
+            "bgcolor": "rgba(240,165,0,0.06)",
+            "borderwidth": 0,
+            "steps": [
+                {"range": [0, hero_pledged * 0.5], "color": "rgba(240,165,0,0.03)"},
+                {"range": [hero_pledged * 0.5, hero_pledged * 0.8], "color": "rgba(240,165,0,0.08)"},
+                {"range": [hero_pledged * 0.8, max_trees], "color": "rgba(240,165,0,0.14)"},
+            ],
+            "threshold": {"line": {"color": "#c9d1d9", "width": 2}, "thickness": 0.82, "value": hero_pledged * 0.95},
+        },
+        domain={"x": [0.35, 0.65], "y": [0.12, 0.88]}
+    ))
+
+    # Gauge 3: Trees Actually Planted (right)
+    fig_hero.add_trace(go.Indicator(
+        mode="gauge+number",
+        value=hero_planted,
+        title={"text": "<b>🌳 Trees</b><br><span style='font-size:0.75em;color:#8b949e'>Actually Planted</span>",
+               "font": {"size": 13, "color": "#c9d1d9"}},
+        number={"font": {"size": 28, "color": "#2ea043"}, "valueformat": ","},
+        gauge={
+            "axis": {"range": [0, max_trees], "tickwidth": 1, "tickcolor": "#21262d",
+                     "tickfont": {"size": 8, "color": "#6e7681"}},
+            "bar": {"color": "#2ea043", "thickness": 0.7},
+            "bgcolor": "rgba(46,160,67,0.06)",
+            "borderwidth": 0,
+            "steps": [
+                {"range": [0, hero_planted * 0.5], "color": "rgba(46,160,67,0.03)"},
+                {"range": [hero_planted * 0.5, hero_planted * 0.8], "color": "rgba(46,160,67,0.08)"},
+                {"range": [hero_planted * 0.8, max_trees], "color": "rgba(46,160,67,0.14)"},
+            ],
+            "threshold": {"line": {"color": "#c9d1d9", "width": 2}, "thickness": 0.82, "value": hero_pledged},
+        },
+        domain={"x": [0.70, 1.0], "y": [0.12, 0.88]}
+    ))
+
+    # ── Flow arrows between gauges ──
+    fig_hero.add_annotation(
+        x=0.325, y=0.35, text="<b>➜</b>", font=dict(size=26, color="rgba(63,185,80,0.5)"),
+        showarrow=False, xref="paper", yref="paper"
+    )
+    fig_hero.add_annotation(
+        x=0.675, y=0.35, text="<b>➜</b>", font=dict(size=26, color="rgba(63,185,80,0.5)"),
+        showarrow=False, xref="paper", yref="paper"
+    )
+
+    # ── Multiplier & fulfillment labels ──
+    multiplier = hero_pledged / hero_dots if hero_dots > 0 else 0
+    fig_hero.add_annotation(
+        x=0.325, y=0.22, text=f"<b>×{multiplier:.0f}</b> trees/dot",
+        font=dict(size=10, color="#3fb950"), showarrow=False, xref="paper", yref="paper"
+    )
+    pct_fulfilled = (hero_planted / hero_pledged * 100) if hero_pledged > 0 else 0
+    fig_hero.add_annotation(
+        x=0.675, y=0.22, text=f"<b>✅ {pct_fulfilled:.0f}%</b> fulfilled",
+        font=dict(size=10, color="#2ea043"), showarrow=False, xref="paper", yref="paper"
+    )
 
     fig_hero.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
         font=dict(family="Inter, sans-serif", color="#c9d1d9"),
         height=520,
-        margin=dict(t=60, b=30, l=10, r=90),
+        margin=dict(t=55, b=15, l=15, r=15),
         title=dict(
             text="📊 Green Conversion Pipeline — At a Glance",
-            font=dict(color="#e6edf3", size=16),
-            x=0.5,
-            xanchor="center",
+            font=dict(color="#e6edf3", size=15),
+            x=0.5, xanchor="center",
         ),
-        xaxis=dict(
-            title="Count",
-            tickfont=dict(color="#8b949e", size=11),
-            gridcolor="rgba(255, 255, 255, 0.04)",
-            zeroline=False,
-        ),
-        yaxis=dict(
-            tickfont=dict(color="#e6edf3", size=13),
-            categoryorder="array",
-            categoryarray=list(reversed(labels)),
-            gridcolor="rgba(0,0,0,0)",
-        ),
-        bargap=0.45,
     )
 
     st.plotly_chart(fig_hero, use_container_width=True)
