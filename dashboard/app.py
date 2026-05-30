@@ -590,7 +590,17 @@ with hcol2:
     
     # Update layout to blend with glassmorphism
     fig_hero.update_layout(
-        **_LAY,
+        **{
+            **_LAY,
+            "legend": dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1
+            ),
+            "margin": dict(t=80, b=40, l=40, r=40)
+        },
         height=520,
         title=dict(
             text="📊 Sowing to Sustainability: Dot Balls vs. Trees Planted",
@@ -612,15 +622,7 @@ with hcol2:
             overlaying="y",
             side="right",
             gridcolor="rgba(255, 255, 255, 0.02)"
-        ),
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="right",
-            x=1
-        ),
-        margin=dict(t=80, b=40, l=40, r=40)
+        )
     )
     
     st.plotly_chart(fig_hero, use_container_width=True)
@@ -654,7 +656,7 @@ with tab1:
                      template=PLOT_THEME, text="dot_balls")
         fig.update_traces(texttemplate="%{text:,}", textposition="outside")
         fig.update_layout(**_LAY, xaxis_tickangle=-35)
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     with c2:
         fig = px.line(season_agg, x="season", y="dot_pct", markers=True,
@@ -663,7 +665,7 @@ with tab1:
                       color_discrete_sequence=["#3fb950"], template=PLOT_THEME)
         fig.update_traces(line_width=3, marker_size=9)
         fig.update_layout(**_LAY)
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("""
     <div class="glass-card" style="margin-top: 15px; margin-bottom: 20px; padding: 20px 24px;">
@@ -717,7 +719,7 @@ with tab1:
                             "total_balls":"Total Balls","dot_pct":"Dot %",
                             "runs":"Runs","trees":"Trees 🌳"}))
     td.index += 1
-    st.dataframe(td, width="stretch", height=380)
+    st.dataframe(td, use_container_width=True, height=380)
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -753,7 +755,7 @@ with tab2:
                      template=PLOT_THEME, text="dot_balls")
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(**_LAY, height=420, yaxis_title="")
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     with c2:
         bot10 = match_agg.nsmallest(10,"dot_balls").sort_values("dot_balls",ascending=False)
@@ -764,7 +766,7 @@ with tab2:
                      template=PLOT_THEME, text="dot_balls")
         fig.update_traces(texttemplate="%{text}", textposition="outside")
         fig.update_layout(**_LAY, height=420, yaxis_title="")
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     c3,c4 = st.columns(2)
     with c3:
@@ -776,7 +778,7 @@ with tab2:
                      template=PLOT_THEME, text="dot_pct")
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
         fig.update_layout(**_LAY, height=420, yaxis_title="")
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     with c4:
         fig = px.histogram(match_agg, x="dot_balls", nbins=40,
@@ -785,7 +787,7 @@ with tab2:
                            labels={"dot_balls":"Dot Balls"},
                            template=PLOT_THEME)
         fig.update_layout(**_LAY)
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     with st.expander("📋 Full Match Table"):
         disp = (match_agg[["label","season","venue","dot_balls","dot_pct","total_balls","total_runs","wickets","trees"]]
@@ -795,7 +797,7 @@ with tab2:
                                   "total_balls":"Total Balls","total_runs":"Runs",
                                   "wickets":"Wickets","trees":"Trees 🌳"}))
         disp.index += 1
-        st.dataframe(disp, width="stretch", height=420)
+        st.dataframe(disp, use_container_width=True, height=420)
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -842,7 +844,7 @@ with tab3:
                      template=PLOT_THEME, text="dot_balls")
         fig.update_traces(texttemplate="%{text:,}", textposition="outside")
         fig.update_layout(**_LAY, height=560, yaxis={"categoryorder":"total ascending"})
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     with c2:
         fig = px.bar(bow.nsmallest(20,"dot_balls").sort_values("dot_balls",ascending=False),
@@ -853,7 +855,7 @@ with tab3:
                      template=PLOT_THEME, text="dot_balls")
         fig.update_traces(texttemplate="%{text:,}", textposition="outside")
         fig.update_layout(**_LAY, height=560, yaxis={"categoryorder":"total descending"})
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     c3,c4 = st.columns(2)
     with c3:
@@ -865,7 +867,7 @@ with tab3:
                      template=PLOT_THEME, text="dot_pct")
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
         fig.update_layout(**_LAY, height=560, yaxis={"categoryorder":"total ascending"})
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     with c4:
         fig = px.scatter(bow, x="dot_pct", y="economy",
@@ -875,7 +877,7 @@ with tab3:
                          labels={"dot_pct":"Dot %","economy":"Economy"},
                          template=PLOT_THEME)
         fig.update_layout(**_LAY)
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("📋 Bowler Leaderboard")
     disp = (bow.sort_values("dot_balls",ascending=False).reset_index(drop=True)
@@ -883,7 +885,7 @@ with tab3:
                               "total_balls":"Balls Bowled","wickets":"Wickets",
                               "runs_given":"Runs Given","economy":"Economy"}))
     disp.index += 1
-    st.dataframe(disp, width="stretch", height=400)
+    st.dataframe(disp, use_container_width=True, height=400)
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -930,7 +932,7 @@ with tab4:
                      template=PLOT_THEME, text="dot_balls_faced")
         fig.update_traces(texttemplate="%{text:,}", textposition="outside")
         fig.update_layout(**_LAY, height=560, yaxis={"categoryorder":"total ascending"})
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     with c2:
         fig = px.bar(bat.nsmallest(20,"dot_balls_faced").sort_values("dot_balls_faced",ascending=False),
@@ -941,7 +943,7 @@ with tab4:
                      template=PLOT_THEME, text="dot_balls_faced")
         fig.update_traces(texttemplate="%{text:,}", textposition="outside")
         fig.update_layout(**_LAY, height=560, yaxis={"categoryorder":"total descending"})
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     c3,c4 = st.columns(2)
     with c3:
@@ -952,7 +954,7 @@ with tab4:
                          labels={"dot_pct":"Dot %","strike_rate":"Strike Rate"},
                          template=PLOT_THEME)
         fig.update_layout(**_LAY)
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     with c4:
         fig = px.bar(bat.nlargest(20,"dot_pct").sort_values("dot_pct"),
@@ -963,7 +965,7 @@ with tab4:
                      template=PLOT_THEME, text="dot_pct")
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
         fig.update_layout(**_LAY, height=560, yaxis={"categoryorder":"total ascending"})
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("📋 Batter Leaderboard")
     disp = (bat.sort_values("dot_balls_faced",ascending=False).reset_index(drop=True)
@@ -972,7 +974,7 @@ with tab4:
                               "runs_scored":"Runs","strike_rate":"Strike Rate",
                               "dismissals":"Dismissals"}))
     disp.index += 1
-    st.dataframe(disp, width="stretch", height=400)
+    st.dataframe(disp, use_container_width=True, height=400)
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -1008,7 +1010,7 @@ with tab5:
                      template=PLOT_THEME, text="dot_pct")
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
         fig.update_layout(**_LAY, height=500, yaxis={"categoryorder":"total ascending"})
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     with c2:
         fig = px.bar(venue_agg.nsmallest(15,"dot_pct").sort_values("dot_pct",ascending=False),
@@ -1019,7 +1021,7 @@ with tab5:
                      template=PLOT_THEME, text="dot_pct")
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
         fig.update_layout(**_LAY, height=500, yaxis={"categoryorder":"total descending"})
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("🗺️ Venue × Season Heatmap")
     top_v = venue_agg.nlargest(25,"matches")["venue"].tolist()
@@ -1036,14 +1038,14 @@ with tab5:
                       title=dict(text="Dot Ball % — Top 25 Venues × Season", font=dict(color="#e6edf3",size=15)),
                       xaxis=dict(title="Season", tickfont=dict(color="#c9d1d9")),
                       yaxis=dict(title="Venue",  tickfont=dict(color="#c9d1d9")))
-    st.plotly_chart(fig, width="stretch")
+    st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("📋 Venue Summary")
     disp = (venue_agg.sort_values("dot_balls",ascending=False).reset_index(drop=True)
             .rename(columns={"venue":"Venue","dot_balls":"Dot Balls","total_balls":"Total Balls",
                               "matches":"Matches","dot_pct":"Dot %","dots_match":"Dots/Match","runs":"Runs"}))
     disp.index += 1
-    st.dataframe(disp, width="stretch", height=380)
+    st.dataframe(disp, use_container_width=True, height=380)
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -1152,7 +1154,7 @@ with tab6:
         yaxis=dict(title="Number of Trees", tickfont=dict(color="#c9d1d9")),
         height=450,
     )
-    st.plotly_chart(fig_compare, width="stretch")
+    st.plotly_chart(fig_compare, use_container_width=True)
 
     # ── Per-match breakdown chart ─────────────────────────────────
     st.subheader("🏟️ Per-Match Dot Balls & Trees — Playoff Matches")
@@ -1188,7 +1190,7 @@ with tab6:
             barmode="group",
             height=460,
         )
-        st.plotly_chart(fig_pm, width="stretch")
+        st.plotly_chart(fig_pm, use_container_width=True)
 
     # ── Cumulative growth ─────────────────────────────────────────
     st.subheader("🌱 Cumulative Trees Planted — Season by Season")
@@ -1227,7 +1229,7 @@ with tab6:
         yaxis=dict(title="Total Trees Planted", tickfont=dict(color="#c9d1d9")),
         height=420,
     )
-    st.plotly_chart(fig_cum, width="stretch")
+    st.plotly_chart(fig_cum, use_container_width=True)
 
     # ── Dot balls used for trees vs total dot balls ───────────────
     st.subheader("⚫ Dot Balls Counted for Initiative vs Total Season Dot Balls")
@@ -1264,7 +1266,7 @@ with tab6:
         xaxis=dict(title="Season", tickfont=dict(color="#c9d1d9")),
         yaxis=dict(title="Dot Balls", tickfont=dict(color="#c9d1d9")),
     )
-    st.plotly_chart(fig_dots, width="stretch")
+    st.plotly_chart(fig_dots, use_container_width=True)
 
     # ── Initiative dataset preview ────────────────────────────────
     st.subheader("📁 Initiative Dataset (Datasets/sustainability/)")
@@ -1273,7 +1275,7 @@ with tab6:
     with c1:
         st.markdown("**green_dot_ball_initiative.csv** — Season-level summary")
         if not init_df.empty:
-            st.dataframe(init_df, width="stretch")
+            st.dataframe(init_df, use_container_width=True)
         else:
             st.warning("File not found.")
     with c2:
