@@ -55,6 +55,72 @@ def is_playoff_match(season, match_number):
     # match_number from JSON is 1-based
     return match_number > threshold
 
+def clean_venue_name(venue):
+    """Unify and clean stadium/venue names to prevent duplicates."""
+    v = venue.strip()
+    
+    # 1. Maharaja Yadavindra Singh / Mullanpur / New Chandigarh
+    if "Maharaja Yadavindra" in v or "Mullanpur" in v:
+        return "Maharaja Yadavindra Singh International Cricket Stadium, Mullanpur, New Chandigarh"
+        
+    # 2. Arun Jaitley Stadium
+    if "Arun Jaitley" in v:
+        return "Arun Jaitley Stadium, Delhi"
+        
+    # 3. Brabourne Stadium
+    if "Brabourne" in v:
+        return "Brabourne Stadium, Mumbai"
+        
+    # 4. Dr DY Patil Sports Academy
+    if "DY Patil" in v:
+        return "Dr DY Patil Sports Academy, Mumbai"
+        
+    # 5. Dr. Y.S. Rajasekhara Reddy
+    if "Rajasekhara Reddy" in v or "ACA-VDCA" in v:
+        return "Dr. Y.S. Rajasekhara Reddy ACA-VDCA Cricket Stadium, Visakhapatnam"
+        
+    # 6. Eden Gardens
+    if "Eden Gardens" in v:
+        return "Eden Gardens, Kolkata"
+        
+    # 7. HPCA Dharamsala
+    if "Himachal Pradesh Cricket Association" in v or "HPCA" in v:
+        return "Himachal Pradesh Cricket Association Stadium, Dharamsala"
+        
+    # 8. M Chinnaswamy Stadium
+    if "Chinnaswamy" in v:
+        return "M Chinnaswamy Stadium, Bengaluru"
+        
+    # 9. MA Chidambaram Stadium / Chepauk
+    if "Chidambaram" in v or "Chepauk" in v:
+        return "MA Chidambaram Stadium, Chepauk, Chennai"
+        
+    # 10. MCA Pune
+    if "Maharashtra Cricket Association" in v:
+        return "Maharashtra Cricket Association Stadium, Pune"
+        
+    # 11. PCA Bindra / Mohali
+    if "Punjab Cricket Association" in v or "IS Bindra" in v:
+        return "Punjab Cricket Association IS Bindra Stadium, Mohali, Chandigarh"
+        
+    # 12. Rajiv Gandhi International Stadium
+    if "Rajiv Gandhi" in v:
+        return "Rajiv Gandhi International Stadium, Uppal, Hyderabad"
+        
+    # 13. Sawai Mansingh
+    if "Sawai Mansingh" in v:
+        return "Sawai Mansingh Stadium, Jaipur"
+        
+    # 14. Shaheed Veer Narayan Singh
+    if "Shaheed Veer Narayan" in v:
+        return "Shaheed Veer Narayan Singh International Stadium, Raipur"
+        
+    # 15. Wankhede
+    if "Wankhede" in v:
+        return "Wankhede Stadium, Mumbai"
+        
+    return v
+
 # =========================
 # LOAD & PARSE JSON FILES
 # =========================
@@ -82,7 +148,8 @@ for filename in json_files:
         season_int = 0
 
     match_date   = info.get("dates", ["Unknown"])[0]
-    venue        = info.get("venue", "Unknown")
+    venue_raw    = info.get("venue", "Unknown")
+    venue        = clean_venue_name(venue_raw)
     event_info   = info.get("event", {})
     match_number = event_info.get("match_number", 0) or 0
     if not match_number and "stage" in event_info:
