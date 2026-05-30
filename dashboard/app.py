@@ -496,9 +496,36 @@ if not selected_init_seasons:
     # fallback to show all seasons if none match the initiative years
     selected_init_seasons = list(INITIATIVE.keys())
 
-hero_dots = sum(INITIATIVE[s]["dot_balls"] for s in selected_init_seasons)
-hero_pledged = sum(INITIATIVE[s]["trees_pledged"] for s in selected_init_seasons)
-hero_planted = sum(INITIATIVE[s]["trees_planted"] for s in selected_init_seasons)
+# WPL data constants (to show 6.4L+ combined totals)
+WPL_DOTS_CONST = 4074
+WPL_PLANTED_CONST = 222550
+
+ipl_dots_total = sum(INITIATIVE[s]["dot_balls"] for s in selected_init_seasons)
+ipl_pledged_total = sum(INITIATIVE[s]["trees_pledged"] for s in selected_init_seasons)
+ipl_planted_total = sum(INITIATIVE[s]["trees_planted"] for s in selected_init_seasons)
+
+# Select Campaign Scope (horizontal radio button with collapsed label)
+st.markdown("<div style='margin-bottom: -5px; font-size: 0.85rem; color: #8b949e; font-weight: 500;'>🎯 Select Reforestation Scope:</div>", unsafe_allow_html=True)
+campaign_scope = st.radio(
+    "Select Reforestation Scope:",
+    ["🏏 IPL Only (Selected Seasons)", "🌍 Combined IPL + WPL Grand Total (Includes 6.4L+ Planted)"],
+    horizontal=True,
+    label_visibility="collapsed",
+    key="hero_campaign_scope"
+)
+
+if "Combined" in campaign_scope:
+    hero_dots = ipl_dots_total + WPL_DOTS_CONST
+    hero_pledged = ipl_pledged_total + WPL_PLANTED_CONST
+    hero_planted = ipl_planted_total + WPL_PLANTED_CONST
+    scope_str = f"Combined IPL & WPL (includes {WPL_PLANTED_CONST:,} trees from WPL 2024–25)"
+    multiplier_text = "<b>Multiple Rates</b><br>(x18 - x500)"
+else:
+    hero_dots = ipl_dots_total
+    hero_pledged = ipl_pledged_total
+    hero_planted = ipl_planted_total
+    scope_str = "IPL Only (Selected Seasons)"
+    multiplier_text = "<b>Variable Rates</b><br>(x18 - x500)"
 
 # ── Unify Green Conversion Pipeline Hub (Full Width) ──────────────────
 st.markdown(f"""
@@ -509,7 +536,8 @@ st.markdown(f"""
                 🌿 The Green Conversion Pipeline Hub
             </h3>
             <p style="color: #8b949e; font-size: 0.88rem; line-height: 1.55; margin: 0;">
-                Tracing the real-time conversion of dot balls bowled into committed and planted trees for the selected seasons (<b>{", ".join(map(str, sorted(selected_init_seasons)))}</b>).
+                Tracing the real-time conversion of dot balls bowled into committed and planted trees for: 
+                <span style="color: #2ea043; font-weight: 600;">{scope_str}</span> (Selected seasons: {", ".join(map(str, sorted(selected_init_seasons)))}).
             </p>
         </div>
         <div style="background: rgba(46, 160, 67, 0.1); border: 1px solid rgba(46, 160, 67, 0.2); padding: 10px 18px; border-radius: 10px; min-width: 220px; text-align: right;">
@@ -526,11 +554,6 @@ st.markdown(f"""
     </div>
 </div>
 """, unsafe_allow_html=True)
-
-plot_seasons = sorted(selected_init_seasons)
-plot_dots = [INITIATIVE[s]["dot_balls"] for s in plot_seasons]
-plot_pledged = [INITIATIVE[s]["trees_pledged"] for s in plot_seasons]
-plot_planted = [INITIATIVE[s]["trees_planted"] for s in plot_seasons]
 
 # ── Premium Triple-Gauge Indicator Dashboard ──────────────────
 fig_hero = go.Figure()
@@ -560,7 +583,7 @@ fig_hero.add_trace(go.Indicator(
     domain={"x": [0.02, 0.30], "y": [0.15, 0.85]}
 ))
 
-# Gauge 2: Trees To Be Planted (center)
+# Gauge 2: Trees Pledged (center)
 fig_hero.add_trace(go.Indicator(
     mode="gauge+number",
     value=hero_pledged,
@@ -617,9 +640,8 @@ fig_hero.add_annotation(
 )
 
 # ── Multiplier & fulfillment labels ──
-multiplier = hero_pledged / hero_dots if hero_dots > 0 else 0
 fig_hero.add_annotation(
-    x=0.33, y=0.32, text=f"<b>×{multiplier:.0f}</b> trees / dot ball",
+    x=0.33, y=0.32, text=multiplier_text,
     font=dict(size=11, color="#3fb950"), showarrow=False, xref="paper", yref="paper"
 )
 pct_fulfilled = (hero_planted / hero_pledged * 100) if hero_pledged > 0 else 0
