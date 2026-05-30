@@ -540,94 +540,67 @@ with hcol1:
     """)
 
 with hcol2:
+    # Aggregate data for the hero chart
     plot_seasons = sorted(selected_init_seasons)
     plot_dots = [INITIATIVE[s]["dot_balls"] for s in plot_seasons]
     plot_pledged = [INITIATIVE[s]["trees_pledged"] for s in plot_seasons]
     plot_planted = [INITIATIVE[s]["trees_planted"] for s in plot_seasons]
-    
-    from plotly.subplots import make_subplots
-    
-    fig_hero = make_subplots(specs=[[{"secondary_y": True}]])
-    
-    # 1. Line for Dot Balls Bowled (Primary Y - Left Axis)
-    fig_hero.add_trace(
-        go.Scatter(
-            x=[f"IPL {s}" for s in plot_seasons],
-            y=plot_dots,
-            name="Dot Balls Bowled ⚫",
-            mode="lines+markers",
-            line=dict(color="#58a6ff", width=3),
-            marker=dict(size=8, color="#58a6ff", symbol="circle"),
-            hovertemplate="<b>%{x}</b><br>Dot Balls Bowled: %{y:,}<extra></extra>"
-        ),
-        secondary_y=False
-    )
-    
-    # 2. Line for Trees Pledged (Secondary Y - Right Axis)
-    fig_hero.add_trace(
-        go.Scatter(
-            x=[f"IPL {s}" for s in plot_seasons],
-            y=plot_pledged,
-            name="Trees Pledged 📜",
-            mode="lines+markers",
-            line=dict(color="#f0a500", width=2.5, dash="dash"),
-            marker=dict(size=8, color="#f0a500", symbol="circle-open"),
-            hovertemplate="Trees Pledged: %{y:,}<extra></extra>"
-        ),
-        secondary_y=True
-    )
-    
-    # 3. Line for Trees Actually Planted (Secondary Y - Right Axis)
-    fig_hero.add_trace(
-        go.Scatter(
-            x=[f"IPL {s}" for s in plot_seasons],
-            y=plot_planted,
-            name="Trees Planted 🌳",
-            mode="lines+markers",
-            line=dict(color="#2ea043", width=4.5),
-            marker=dict(size=11, color="#2ea043", symbol="diamond"),
-            hovertemplate="Trees Actually Planted: %{y:,}<extra></extra>"
-        ),
-        secondary_y=True
-    )
-    
-    # Update layout to blend with glassmorphism safely without duplicate argument collisions
-    fig_hero.update_layout(
-        **{
-            **_LAY,
-            "legend": dict(
-                orientation="h",
-                yanchor="bottom",
-                y=1.02,
-                xanchor="right",
-                x=1
+
+    # ── Beautiful summary horizontal bar chart ─────────────────────
+    # Shows 3 key metrics as big, bold horizontal bars
+    labels = [
+        "⚫ Dot Balls Bowled",
+        "📜 Trees To Be Planted",
+        "🌳 Trees Actually Planted"
+    ]
+    values = [hero_dots, hero_pledged, hero_planted]
+    colors = ["#58a6ff", "#f0a500", "#2ea043"]
+
+    fig_hero = go.Figure()
+    for i in range(3):
+        fig_hero.add_trace(go.Bar(
+            y=[labels[i]],
+            x=[values[i]],
+            orientation="h",
+            marker=dict(
+                color=colors[i],
+                line=dict(color=colors[i], width=1),
+                opacity=0.85,
             ),
-            "margin": dict(t=80, b=40, l=40, r=40)
-        },
+            text=[f"  {values[i]:,}"],
+            textposition="outside",
+            textfont=dict(color=colors[i], size=18, family="Inter, sans-serif"),
+            hovertemplate=f"<b>{labels[i]}</b><br>Value: %{{x:,}}<extra></extra>",
+            showlegend=False,
+        ))
+
+    fig_hero.update_layout(
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
+        font=dict(family="Inter, sans-serif", color="#c9d1d9"),
         height=520,
+        margin=dict(t=60, b=30, l=10, r=90),
         title=dict(
-            text="📊 Sowing to Sustainability: Dot Balls vs. Trees Planted",
-            font=dict(color="#e6edf3", size=15)
+            text="📊 Green Conversion Pipeline — At a Glance",
+            font=dict(color="#e6edf3", size=16),
+            x=0.5,
+            xanchor="center",
         ),
         xaxis=dict(
-            title="IPL Season", 
-            tickfont=dict(color="#c9d1d9"),
-            gridcolor="rgba(255, 255, 255, 0.05)"
+            title="Count",
+            tickfont=dict(color="#8b949e", size=11),
+            gridcolor="rgba(255, 255, 255, 0.04)",
+            zeroline=False,
         ),
         yaxis=dict(
-            title="Dot Balls Bowled (Left Axis)", 
-            tickfont=dict(color="#c9d1d9"),
-            gridcolor="rgba(255, 255, 255, 0.05)"
+            tickfont=dict(color="#e6edf3", size=13),
+            categoryorder="array",
+            categoryarray=list(reversed(labels)),
+            gridcolor="rgba(0,0,0,0)",
         ),
-        yaxis2=dict(
-            title="Number of Trees (Right Axis)", 
-            tickfont=dict(color="#c9d1d9"),
-            overlaying="y",
-            side="right",
-            gridcolor="rgba(255, 255, 255, 0.02)"
-        )
+        bargap=0.45,
     )
-    
+
     st.plotly_chart(fig_hero, use_container_width=True)
 
 st.markdown("<hr style='margin: 20px 0 25px 0; border-color: #1f2a3d;'>", unsafe_allow_html=True)
